@@ -23,7 +23,88 @@ import { NotImplementedError } from '../extensions/index.js';
  *  [1, 1, 1]
  * ]
  */
-export default function minesweeper (/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+
+ export default function minesweeper(matrix) {
+   let result = JSON.parse(JSON.stringify(matrix));
+ 
+   for (let i = 0; i < matrix.length; i++) 
+   {
+     for (let j = 0; j < matrix[i].length; j++) 
+     {
+       let counter = 0;
+ 
+       if (j !== matrix[i].length - 1) 
+       {
+         if (matrix[i][j + 1] === true) 
+         {
+           counter++;
+         }
+       }
+ 
+       if (j !== 0) 
+       {
+         if (matrix[i][j - 1] === true) 
+         {
+           counter++;
+         }
+       }
+ 
+       if (i !== matrix.length - 1) 
+       {
+         if (matrix[i + 1][j] === true) 
+         {
+           counter++;
+         }
+       }
+
+       if (i !== 0) 
+       {
+         if (matrix[i - 1][j] === true) 
+         {
+           counter++;
+         }
+       }
+ 
+       if (i !== 0 && j !== 0) 
+       {
+         if (matrix[i - 1][j - 1] === true) 
+         {
+           counter++;
+         }
+       }
+ 
+       if (i !== 0 && j !== matrix.length - 1) 
+       {
+         if (matrix[i - 1][j + 1] === true) 
+         {
+           counter++;
+         }
+       }
+ 
+       if (i !== matrix.length - 1 && j !== 0) 
+       {
+         if (matrix[i + 1][j - 1] === true) 
+         {
+           counter++;
+         }
+       }
+ 
+       if (i !== matrix.length - 1 && j !== matrix.length - 1) 
+       {
+         if (matrix[i + 1][j + 1] === true) 
+         {
+           counter++;
+         }
+       }
+ 
+       result[i][j] = counter;
+ 
+       if (matrix[i][j] === true) 
+       {
+         result[i][j] = 1;
+       }
+     }
+   }
+ 
+   return result;
+ }
